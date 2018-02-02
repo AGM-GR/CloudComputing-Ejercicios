@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>CC - Cliente REST</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script> var DireccionApi = "http://localhost:5000" </script>
+
+    <style>
+
+      html, body {
+          height: 100%;
+      }
+
+      /* Remove the navbar's default margin-bottom and rounded borders */
+      .navbar {
+          margin-bottom: 0;
+          border-radius: 0;
+      }
+
+      .navbar h1 {
+          margin: 0;
+          margin-top: 6px;
+          color: #fffbf0;
+      }
+
+      /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+      .row.content {
+          height: 600px;
+      }
+
+      /* Set gray background color and 100% height */
+      .sidenav {
+          padding-top: 20px;
+          background-color: #f1f1f1;
+          height: 100%;
+      }
+
+      /* Set black background color, white text and some padding */
+      footer {
+          background-color: #555;
+          color: white;
+          padding: 15px;
+      }
+
+      /* On small screens, set height to 'auto' for sidenav and grid */
+      @media screen and (max-width: 767px) {
+          .sidenav {
+              height: auto;
+              padding: 15px;
+          }
+
+          .row.content {
+              height:auto;
+          }
+      }
+
+    </style>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h1>Cliente REST - STATUS</h1>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid text-center">
+        <div class="row content">
+
+          <h2>Status:</h2>
+          <h3 class="status_result"></h3>
+
+        </div>
+    </div>
+
+
+    <footer class="container-fluid text-center">
+        <p>Alejandro Guerrero Martínez  -   CC -   Cliente REST</p>
+    </footer>
+
+</body>
+
+    <!-- Hace petición al servicio REST -->
+    <script>
+
+        function cargarStatus() {
+            $.ajax({
+                url: DireccionApi.concat("/status"),
+                type: 'get',
+                success: function(datos) {
+
+                    $(".status_result").html(datos["status"]);
+
+                },
+                failure: function(datos) {
+
+                    alert("No se ha podido acceder a los datos.\nPruebe a recargar la página o intente acceder más tarde.");
+                }
+            });
+        }
+
+        cargarStatus();
+
+    </script>
+
+</html>

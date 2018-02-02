@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  microservicio:
+    build: microservicio
+    ports:
+      - "5000:5000"
+  web:
+    build: frontend
+    ports:
+      - "80:80"
